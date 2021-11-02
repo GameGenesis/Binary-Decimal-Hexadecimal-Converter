@@ -1,9 +1,5 @@
 exitProgram = False #Variable to exit the loop
 
-binary = ""
-hexadecimal = ""
-decimal = 0
-
 def valueToHexString(value): #Input a value (number), returns a hexadecimal string
     if value == "10":
         return "A"
@@ -45,14 +41,13 @@ def checkBinary(string): #Checks if the string is a binary (only contains 1s and
         return False
 
 def binaryToDec(): #Converts binary to decimal
-    print("\n***************************\nBinary to Decimal\n")
+    print("\nBinary to Decimal\n")
     decimal = 0
-    binary = ""
     binary = input("Enter the binary value you want to convert: ")
 
     if not checkBinary(binary): #Checks if the string is a binary
-        print("Error: Incorrect Format Entered.")
-        print("\n***************************")
+        handleError("Incorrect Format Entered.")
+        print("_________________________________")
         input()
         return
 
@@ -62,11 +57,11 @@ def binaryToDec(): #Converts binary to decimal
         decimal += 2 ** (len(binary) - i - 1)
 
     print(f">> {decimal}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
 def decToBinary(): #Converts decimal to binary
-    print("\n***************************\nDecimal to Binary\n")
+    print("Decimal to Binary\n")
     decimal = 0
     decimal = input("Enter the decimal value you want to convert: ")
     binary = ""
@@ -74,8 +69,8 @@ def decToBinary(): #Converts decimal to binary
     if decimal.isdecimal(): #Checks if string is decimal
         decimal = int(decimal)
     else:
-        print("Error: Incorrect Format Entered.")
-        print("\n***************************")
+        handleError("Incorrect Format Entered.")
+        print("_________________________________")
         input()
         return
     
@@ -84,11 +79,11 @@ def decToBinary(): #Converts decimal to binary
         decimal //= 2
 
     print(f">> {binary}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
 def hexToDec(): #Converts hexadecimal to decimal
-    print("\n***************************\nHexadecimal to Decimal\n")
+    print("Hexadecimal to Decimal\n")
     decimal = 0
     hexadecimal = ""
     hexadecimal = input("Enter the hexadecimal value you want to convert: ")
@@ -97,11 +92,11 @@ def hexToDec(): #Converts hexadecimal to decimal
         decimal += hexStringToValue(hexadecimal[i]) * (16 ** (len(hexadecimal) - i - 1))
 
     print(f">> {decimal}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
 def decToHex(): #Converts decimal to hexadecimal
-    print("\n***************************\nDecimal to Hexadecimal\n")
+    print("Decimal to Hexadecimal\n")
     decimal = 0
     decimal = input("Enter the decimal value you want to convert: ")
     hexadecimal = ""
@@ -109,8 +104,8 @@ def decToHex(): #Converts decimal to hexadecimal
     if decimal.isdecimal(): #Checks if string is decimal
         decimal = int(decimal)
     else:
-        print("Error: Incorrect Format Entered.")
-        print("\n***************************")
+        handleError("Incorrect Format Entered.")
+        print("_________________________________")
         input()
         return
 
@@ -120,19 +115,19 @@ def decToHex(): #Converts decimal to hexadecimal
         decimal //= 16
 
     print(f">> {hexadecimal}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
 def binaryToHex(): #Converts Binary to Hexadecimal
-    print("\n***************************\nBinary to Hexadecimal\n")
+    print("Binary to Hexadecimal\n")
     decimal = 0
     hexadecimal = ""
     binary = ""
     binary = input("Enter the binary value you want to convert: ")
 
     if not checkBinary(binary): #Checks if the string is a binary
-        print("Error: Incorrect Format Entered.")
-        print("\n***************************")
+        handleError("Incorrect Format Entered.")
+        print("_________________________________")
         input()
         return
 
@@ -147,11 +142,11 @@ def binaryToHex(): #Converts Binary to Hexadecimal
         decimal //= 16
 
     print(f">> {hexadecimal}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
 def hexToBinary(): #Converts hexadecimal to binary
-    print("\n***************************\nHexadecimal to Binary\n")
+    print("Hexadecimal to Binary\n")
     decimal = 0
     binary = ""
     hexadecimal = ""
@@ -165,24 +160,34 @@ def hexToBinary(): #Converts hexadecimal to binary
         decimal //= 2
 
     print(f">> {binary}")
-    print("\n***************************")
+    print("_________________________________")
     input()
 
+#Prints out the error message
+def handleError(error_str):
+    print(f"Error: {error_str}\n")
+
+
 while not exitProgram: #While the program is running, display the command menu and ask the user to enter a command
-    command = int(input(
+    command = input(
     """This is a conversion tool. Enter the number of the command to execute.
 
-***************************
-1. Binary to Decimal
-2. Decimal to Binary
-3. Hexadecimal to Decimal
-4. Decimal to Hexadecimal
-5. Binary to Hexadecimal
-6. Hexadecimal to Binary
-7. Exit
-***************************
-: """
-    ))
+_________________________________
+
+ 1. Binary to Decimal
+ 2. Decimal to Binary
+ 3. Hexadecimal to Decimal
+ 4. Decimal to Hexadecimal
+ 5. Binary to Hexadecimal
+ 6. Hexadecimal to Binary
+ 7. Exit
+_________________________________
+> """
+    )
+
+    #Check if command is an int; if yes, parse to int
+    if (command.isnumeric()):
+        command = int(command)
 
     #Call the function corresponding to the command. If the command is not valid, print an error message.
     if command == 1:
@@ -200,4 +205,4 @@ while not exitProgram: #While the program is running, display the command menu a
     elif command == 7:
         exitProgram = True
     else:
-        print("Invalid Command")
+        handleError("Invalid Command.")
