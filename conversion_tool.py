@@ -1,3 +1,5 @@
+import os
+
 exitProgram = False #Variable to exit the loop
 
 def valueToHexString(value): #Input a value (number), returns a hexadecimal string
@@ -165,10 +167,16 @@ def hexToBinary(): #Converts hexadecimal to binary
 
 #Prints out the error message
 def handleError(error_str):
-    print(f"Error: {error_str}\n")
+    print(f">> Error: {error_str}")
 
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
 
 while not exitProgram: #While the program is running, display the command menu and ask the user to enter a command
+    clearConsole()
     command = input(
     """This is a conversion tool. Enter the number of the command to execute.
 
@@ -206,3 +214,5 @@ _________________________________
         exitProgram = True
     else:
         handleError("Invalid Command.")
+        print("_________________________________")
+        input()
