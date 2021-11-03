@@ -1,6 +1,6 @@
 import os
 
-exitProgram = False #Variable to exit the loop
+exit_program = False #Variable to exit the loop
 
 def valueToHexString(value): #Input a value (number), returns a hexadecimal string
     if value == "10":
@@ -175,7 +175,7 @@ def clearConsole():
         command = 'cls'
     os.system(command)
 
-while not exitProgram: #While the program is running, display the command menu and ask the user to enter a command
+while not exit_program: #While the program is running, display the command menu and ask the user to enter a command
     clearConsole()
     command = input(
     """This is a conversion tool. Enter the number of the command to execute.
